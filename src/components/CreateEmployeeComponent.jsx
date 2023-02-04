@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import EmployeeService from "../services/EmployeeService";
 
 class CreateEmployeeComponent extends Component {
   constructor(props) {
@@ -23,6 +24,13 @@ class CreateEmployeeComponent extends Component {
       emailID: this.state.emailID,
     };
     console.log("employee => " + JSON.stringify(employee));
+
+    // axios post method returns a promise 
+    EmployeeService.createEmployee(employee).then(res => {
+        console.log('employee added to database');
+        // this is the vanilla js way of redirecting, change later 
+        window.location.replace('/employees');
+    })
   };
 
   changeFirstNameHandler = (event) => {
